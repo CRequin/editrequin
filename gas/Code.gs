@@ -39,6 +39,7 @@ function onFormSubmit(e) {
   const copies        = getValue(e, "구매 권 수");
   const customerName  = getValue(e, "배송인 이름");
   const address       = getValue(e, "배송 주소");
+  const requests      = getValue(e, "요청 사항");
 
   // Order ID 생성 후 Sheets에 기록
   const orderId = generateOrderId(lastRow);
@@ -55,7 +56,7 @@ function onFormSubmit(e) {
   MailApp.sendEmail({
     to: CONFIG.OWNER_EMAIL,
     subject: `[새 주문] ${orderId} — ${customerName}`,
-    body: buildOwnerEmail(orderId, customerName, customerEmail, copies, address),
+    body: buildOwnerEmail(orderId, customerName, customerEmail, copies, address, requests),
   });
 }
 
@@ -191,7 +192,7 @@ function buildJsonResponse(data) {
 // ============================================================
 // 이메일 템플릿: 소유자 알림
 // ============================================================
-function buildOwnerEmail(orderId, name, email, copies, address) {
+function buildOwnerEmail(orderId, name, email, copies, address, requests) {
   return `새 주문이 접수되었습니다.
 
 주문번호:   ${orderId}
@@ -199,6 +200,7 @@ function buildOwnerEmail(orderId, name, email, copies, address) {
 이메일:     ${email}
 수량:       ${copies}
 배송주소:   ${address}
+요청사항:   ${requests || "없음"}
 
 [처리 방법]
 1. 고객에게 입금 안내 (계좌번호 등)
