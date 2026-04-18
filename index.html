@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self';
+                 img-src 'self' data:;
+                 frame-src https://docs.google.com;
+                 connect-src https://script.google.com https://script.googleusercontent.com;">
+  <title>책 제목 — 지금 주문하세요</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>책 제목</h1>
+    <p class="tagline">부제목 또는 한 줄 소개</p>
+  </header>
+
+  <section class="stats-bar" aria-live="polite">
+    <div class="stat">
+      <span class="stat-number" id="order-count">—</span>
+      <span class="stat-label">주문 수</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number" id="fundraising-amount">—</span>
+      <span class="stat-label">모금액</span>
+    </div>
+  </section>
+
+  <main>
+    <section class="promo">
+      <div class="promo-image">
+        <img src="assets/book-cover.jpg" alt="책 표지" class="book-cover">
+      </div>
+      <div class="promo-text">
+        <h2>이 책에 대하여</h2>
+        <p>책 소개 내용이 들어갑니다. 어떤 이야기인지, 왜 읽어야 하는지 설명해주세요.</p>
+        <p>추가 설명 문단. 저자 소개나 책의 의의 등을 적을 수 있습니다.</p>
+        <p class="price-tag">한 권 <strong>25,000원</strong></p>
+        <a href="#order" class="cta-button">지금 주문하기</a>
+      </div>
+    </section>
+
+    <section class="author">
+      <h2>저자 소개</h2>
+      <p>저자에 대한 소개가 들어갑니다.</p>
+    </section>
+
+    <section class="order" id="order">
+      <h2>주문하기</h2>
+      <p>아래 양식을 작성해 주세요. 입금 안내는 이메일로 전달됩니다.</p>
+
+      <!-- Google Form 임베드: YOUR_FORM_ID를 실제 Form ID로 교체하세요 -->
+      <div class="form-wrapper">
+        <iframe
+          src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true"
+          width="100%"
+          height="820"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          title="책 주문 양식"
+          loading="lazy">
+          양식을 불러오는 중...
+        </iframe>
+      </div>
+    </section>
+
+    <section class="contact">
+      <h2>문의하기</h2>
+      <p>궁금하신 점이 있으시면 이메일로 연락해 주세요.</p>
+      <a href="mailto:your@gmail.com?subject=책%20주문%20문의" class="contact-link">
+        your@gmail.com
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2024 저자명. All rights reserved.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

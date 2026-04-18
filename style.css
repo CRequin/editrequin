@@ -1,0 +1,224 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary: #2c4a2e;
+  --color-accent: #e8c547;
+  --color-bg: #fafaf6;
+  --color-text: #1a1a1a;
+  --color-text-light: #555;
+  --max-width: 900px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-serif);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.7;
+}
+
+/* ===== Header ===== */
+header {
+  background: var(--color-primary);
+  color: white;
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+}
+
+header h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  font-style: italic;
+}
+
+/* ===== Stats Bar ===== */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 2rem 1rem;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: bold;
+  line-height: 1;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0.3rem;
+}
+
+/* ===== Main Content ===== */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+section {
+  padding: 3rem 0;
+  border-bottom: 1px solid #e0e0d8;
+}
+
+section:last-child {
+  border-bottom: none;
+}
+
+section h2 {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  margin-bottom: 1.2rem;
+}
+
+/* ===== Promo Section ===== */
+.promo {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.promo-image {
+  flex: 0 0 240px;
+}
+
+.book-cover {
+  width: 100%;
+  height: auto;
+  box-shadow: 4px 6px 20px rgba(0,0,0,0.25);
+  border-radius: 2px;
+  display: block;
+}
+
+/* Placeholder when no image is available */
+.book-cover[src$="book-cover.jpg"]:not([complete]),
+.book-cover:not([src]) {
+  background: #ddd;
+  min-height: 320px;
+}
+
+.promo-text {
+  flex: 1;
+}
+
+.promo-text p {
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+}
+
+.price-tag {
+  font-size: 1.2rem;
+  color: var(--color-text) !important;
+  margin: 1.5rem 0 !important;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: background 0.2s;
+}
+
+.cta-button:hover {
+  background: #3d6b40;
+}
+
+/* ===== Author Section ===== */
+.author p {
+  color: var(--color-text-light);
+  max-width: 640px;
+}
+
+/* ===== Order Section ===== */
+.order p {
+  color: var(--color-text-light);
+  margin-bottom: 1.5rem;
+}
+
+.form-wrapper {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.form-wrapper iframe {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+/* ===== Contact Section ===== */
+.contact p {
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+}
+
+.contact-link {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 2px;
+}
+
+.contact-link:hover {
+  color: #3d6b40;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: #999;
+  background: #f0f0ec;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 680px) {
+  .promo {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .promo-image {
+    flex: none;
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .stats-bar {
+    gap: 2.5rem;
+  }
+}
