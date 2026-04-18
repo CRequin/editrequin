@@ -9,18 +9,20 @@ const CONFIG = {
   SHEET_NAME: "Form Responses 1",           // Google Sheets 탭 이름
 
   // 컬럼 번호 (1부터 시작)
-  // A~F: Form 자동 생성, G~K: 수동 추가
-  COL_TIMESTAMP: 1,         // A: 타임스탬프
-  COL_EMAIL: 2,             // B: 이메일 주소
-  COL_COPIES: 3,            // C: 구매 권 수
-  COL_NAME: 4,              // D: 배송인 이름
-  COL_ADDRESS: 5,           // E: 배송 주소
-  COL_CONSENT: 6,           // F: 동의 여부 (기록만, 처리 불필요)
-  COL_ORDER_ID: 7,          // G: Order ID (Apps Script 자동)
-  COL_PAYMENT_CONFIRMED: 8, // H: 입금확인 (소유자 체크박스)
-  COL_CONFIRMATION_SENT: 9, // I: 확인메일발송 (Apps Script 자동)
-  COL_CONFIRMATION_SENT_AT: 10, // J: 발송시각 (Apps Script 자동)
-  COL_OWNER_NOTES: 11,      // K: 소유자 메모 (수동, 선택사항)
+  // A~G: Form 자동 생성, H~M: 수동 추가
+  COL_TIMESTAMP: 1,             // A: 타임스탬프
+  COL_EMAIL: 2,                 // B: 이메일 주소
+  COL_COPIES: 3,                // C: 구매 권 수
+  COL_NAME: 4,                  // D: 배송인 이름
+  COL_ADDRESS: 5,               // E: 배송 주소
+  COL_REQUESTS: 6,              // F: 요청 사항 (기록만, 처리 불필요)
+  COL_CONSENT: 7,               // G: 동의 여부 (기록만, 처리 불필요)
+  COL_ORDER_ID: 8,              // H: Order ID (Apps Script 자동)
+  COL_PAYMENT_CONFIRMED: 9,     // I: 입금확인 (소유자 체크박스)
+  COL_CONFIRMATION_SENT: 10,    // J: 확인메일발송 (Apps Script 자동)
+  COL_CONFIRMATION_SENT_AT: 11, // K: 메일발송시각 (Apps Script 자동)
+  COL_DELIVERY_DONE: 12,        // L: 배송 완료 (소유자 수동 체크박스)
+  COL_OWNER_NOTES: 13,          // M: 메모 (수동, 선택사항)
 
   MAX_ORDERS_PER_EMAIL_PER_DAY: 3,          // 동일 이메일 일일 주문 한도 (스팸 방지)
 };
@@ -45,7 +47,7 @@ function onFormSubmit(e) {
   // 스팸/어뷰징 감지
   if (isRateLimited(sheet, customerEmail)) {
     sheet.getRange(lastRow, CONFIG.COL_OWNER_NOTES)
-      .setValue("FLAGGED: 동일 이메일 일일 한도 초과");
+         .setValue("FLAGGED: 동일 이메일 일일 한도 초과");
     return;
   }
 
@@ -71,7 +73,7 @@ function onEdit(e) {
   // 이미 발송한 경우 중복 방지
   if (sheet.getRange(row, CONFIG.COL_CONFIRMATION_SENT).getValue() === true) return;
 
-  const rowData       = sheet.getRange(row, 1, 1, 11).getValues()[0];
+  const rowData       = sheet.getRange(row, 1, 1, 13).getValues()[0];
   const customerEmail = rowData[CONFIG.COL_EMAIL - 1];
   const copies        = rowData[CONFIG.COL_COPIES - 1];
   const customerName  = rowData[CONFIG.COL_NAME - 1];
@@ -201,7 +203,7 @@ function buildOwnerEmail(orderId, name, email, copies, address) {
 [처리 방법]
 1. 고객에게 입금 안내 (계좌번호 등)
 2. 입금 확인 후 Google Sheets 열기
-3. ${orderId} 행의 '입금확인' 체크박스(H열) 체크
+3. ${orderId} 행의 '입금확인' 체크박스(I열) 체크
    → 고객에게 확인 메일이 자동 발송됩니다`;
 }
 
