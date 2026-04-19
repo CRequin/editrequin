@@ -5,56 +5,246 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self';
-                 script-src 'self';
-                 style-src 'self';
+                 script-src 'self' 'unsafe-inline';
+                 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
+                 font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:;
                  img-src 'self' data:;
                  frame-src https://docs.google.com;
                  connect-src https://script.google.com https://script.googleusercontent.com;">
-  <title>나단이라고 불러줘 — 지금 주문하세요</title>
+  <title>나단이라고 불러줘 — 상어 출판사</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <h1>나단이라고 불러줘</h1>
-    <p class="tagline">자신으로 살아가기 위한 한 청소년의 이야기</p>
-  </header>
-
-  <section class="stats-bar" aria-live="polite">
-    <div class="stat">
-      <span class="stat-number" id="order-count">—</span>
-      <span class="stat-label">주문 수</span>
+  <!-- =========================== NAV =========================== -->
+  <nav class="nav">
+    <a class="nav-brand" href="#top">
+      <img src="assets/logo.png" alt="상어 출판사">
+      <span class="nav-brand-name">상어 출판사</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">책 소개</a>
+      <a href="#gallery">내지 보기</a>
+      <a href="#reviews">추천글</a>
+      <a href="#author">저자</a>
     </div>
-    <div class="stat">
-      <span class="stat-number" id="fundraising-amount">—</span>
-      <span class="stat-label">모금액</span>
+    <a href="#order" class="nav-cta">주문하기</a>
+  </nav>
+
+  <!-- =========================== HERO =========================== -->
+  <section class="hero" id="top">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Éditions Requin — 2026</div>
+      <h1 class="hero-title">
+        나를, <em>나단</em>이라고<br>불러줘.
+      </h1>
+      <p class="hero-tag">
+        자기 자신으로 살아가기 위해 이름을 새로 짓기로 한,<br>
+        한 청소년의 조용하고 단단한 이야기.
+      </p>
+      <div class="hero-meta">
+        <span>그래픽 노블</span>
+        <span>국내 초판</span>
+        <span>144쪽 · 양장</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#order" class="btn btn-primary">지금 주문하기 →</a>
+        <a href="#about" class="btn btn-ghost">이야기 먼저 보기</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-book">
+        <img src="assets/book-cover.jpg" alt="『나단이라고 불러줘』 표지">
+      </div>
     </div>
   </section>
 
-  <main>
-    <section class="promo">
-      <div class="promo-image">
-        <img src="assets/book-cover.jpg" alt="책 표지" class="book-cover">
+  <!-- =========================== STATS =========================== -->
+  <section class="stats-bar" aria-live="polite">
+    <div class="stats-inner">
+      <div class="stats-label">지금까지<br>독자들의 기록</div>
+      <div class="stat">
+        <span class="stat-number"><span id="order-count">—</span><span class="stat-suffix">권</span></span>
+        <span class="stat-label">누적 주문</span>
       </div>
-      <div class="promo-text">
-        <h2>나단에 대하여</h2>
-        <p>책 소개 내용이 들어갑니다. 어떤 이야기인지, 왜 읽어야 하는지 설명해주세요.</p>
-        <p>추가 설명 문단. 저자 소개나 책의 의의 등을 적을 수 있습니다.</p>
-        <p class="price-tag">한 권 <strong>18,000원</strong></p>
-        <a href="#order" class="cta-button">지금 주문하기</a>
+      <div class="stat">
+        <span class="stat-number"><span id="fundraising-amount">—</span></span>
+        <span class="stat-label">모금액</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="author">
-      <h2>저자 소개</h2>
-      <p>저자에 대한 소개가 들어갑니다.</p>
-    </section>
+  <!-- =========================== ABOUT =========================== -->
+  <section class="section" id="about">
+    <div class="about">
+      <div class="about-image">
+        <img src="assets/spread-02.png" alt="내지 — 가족 상담 장면">
+        <div class="caption">pp. 78–79</div>
+      </div>
+      <div class="about-body">
+        <div class="section-eyebrow">About the book</div>
+        <h2 class="section-title">이름 하나를 바꾸는 일의 무게</h2>
+        <p class="section-lede">
+          나단은 자신의 몸과 이름 사이에서 오래 망설인 아이다.
+          가족에게, 친구에게, 그리고 자기 자신에게
+          "나를 나단이라고 불러달라"고 말하기까지
+          그가 견뎌낸 시간을 책은 천천히 따라간다.
+        </p>
 
-    <section class="order" id="order">
-      <h2>주문하기</h2>
-      <p>아래 양식을 작성해 주세요. 입금 안내는 이메일로 전달됩니다.</p>
+        <blockquote class="pull">
+          "나단이라고 불러 주실래요?<br>
+          ─ 저희 엄마처럼 말하시네요."
+        </blockquote>
 
-      <!-- Google Form 임베드: YOUR_FORM_ID를 실제 Form ID로 교체하세요 -->
+        <h3>책에 대하여</h3>
+        <p>
+          가족과의 갈등, 상담실의 침묵, 친구들과의 장난, 그리고 퍼레이드의 함성까지 —
+          청소년 나단의 일상은 평범한 순간과 결정적인 순간이 뒤섞여 있다.
+          작가는 섬세한 수채 일러스트와 짧은 대화만으로,
+          한 사람이 자기 자신이 되어가는 과정을 그려낸다.
+        </p>
+        <p>
+          이 책은 트랜스젠더 청소년의 이야기이자, 동시에
+          "나답게 산다"는 말이 누구에게나 얼마나 무거운 결심인지
+          묻는 책이기도 하다. 판단하지 않고, 재촉하지 않고, 곁에 앉아 듣는 자세로 읽기를 바란다.
+        </p>
+
+        <dl class="specs">
+          <div><dt>분류</dt><dd>그래픽 노블 · 청소년</dd></div>
+          <div><dt>판형</dt><dd>182 × 235 mm</dd></div>
+          <div><dt>쪽수</dt><dd>144쪽</dd></div>
+          <div><dt>제본</dt><dd>양장 · 실매기</dd></div>
+          <div><dt>ISBN</dt><dd>979-11-000000-0-0</dd></div>
+          <div><dt>출간</dt><dd>2026년 봄</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== GALLERY =========================== -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-head">
+      <div>
+        <div class="section-eyebrow">Interior pages</div>
+        <h2 class="section-title">책 속 한 장면</h2>
+      </div>
+      <div class="gallery-counter">
+        <strong id="gal-cur">01</strong> / <span id="gal-total">05</span>
+      </div>
+    </div>
+
+    <div class="gallery-stage">
+      <div class="gallery-frame" id="gal-frame">
+        <div class="gallery-slide active" data-caption="나단, 자기 몸을 조용히 들여다보다."><img src="assets/book-cover.jpg" alt=""></div>
+        <div class="gallery-slide" data-caption="형제들 사이의 장난 — 어느 평범한 오후."><img src="assets/spread-01.png" alt=""></div>
+        <div class="gallery-slide" data-caption="가족 상담실, 처음으로 터져나온 목소리."><img src="assets/spread-02.png" alt=""></div>
+        <div class="gallery-slide" data-caption="선생님과 나, 매주 한 번의 시간."><img src="assets/spread-03.png" alt=""></div>
+        <div class="gallery-slide" data-caption="퍼레이드 — 마침내, 함께 외치는 자리."><img src="assets/spread-04.png" alt=""></div>
+      </div>
+      <p class="gallery-caption" id="gal-caption">나단, 자기 몸을 조용히 들여다보다.</p>
+      <div class="gallery-controls">
+        <button class="gallery-btn" id="gal-prev" aria-label="이전">←</button>
+        <div class="gallery-dots" id="gal-dots"></div>
+        <button class="gallery-btn" id="gal-next" aria-label="다음">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== REVIEWS =========================== -->
+  <section class="section" id="reviews">
+    <div class="section-eyebrow">Reviews</div>
+    <h2 class="section-title">추천의 말</h2>
+    <p class="section-lede">세 분의 독자가 나단과 보낸 시간을 보내주셨습니다. 카드를 누르면 전문을 읽을 수 있습니다.</p>
+
+    <div class="themes reviews-grid">
+      <a class="theme review-card" href="reviews.html#review-1">
+        <div class="theme-num">추천 01</div>
+        <h3>"이름 하나가 이렇게 무거울 수 있구나."</h3>
+        <p class="review-excerpt">나단이 자신의 이름을 꺼내놓는 장면 앞에서 나는 책장을 덮고 한참을 앉아 있었다. 목소리가 아니라 여백이 말하는 책이다. …</p>
+        <div class="review-meta">
+          <span class="review-author">─ 독자 A</span>
+          <span class="review-more">전문 읽기 →</span>
+        </div>
+      </a>
+      <a class="theme review-card" href="reviews.html#review-2">
+        <div class="theme-num">추천 02</div>
+        <h3>"가족이라는 단어를 다시 쓰게 한다."</h3>
+        <p class="review-excerpt">부모가 완벽하지 않아도, 흔들리면서도 곁에 앉아 듣는 일이 얼마나 큰 사랑인지 이 책은 말없이 보여준다. …</p>
+        <div class="review-meta">
+          <span class="review-author">─ 독자 B</span>
+          <span class="review-more">전문 읽기 →</span>
+        </div>
+      </a>
+      <a class="theme review-card" href="reviews.html#review-3">
+        <div class="theme-num">추천 03</div>
+        <h3>"수채의 번짐이 대사를 대신한다."</h3>
+        <p class="review-excerpt">그림이 먼저 말을 거는 책. 나단의 얼굴 위로 번지는 색들을 보며 나는 내 청소년기를 다시 떠올렸다. …</p>
+        <div class="review-meta">
+          <span class="review-author">─ 독자 C</span>
+          <span class="review-more">전문 읽기 →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- =========================== AUTHOR =========================== -->
+  <section class="author" id="author">
+    <div class="author-inner">
+      <div class="author-portrait">
+        <span>Author Portrait<br>— placeholder —</span>
+      </div>
+      <div class="author-body">
+        <div class="section-eyebrow">About the author</div>
+        <h2 class="section-title">작가의 말</h2>
+        <p>
+          『나단이라고 불러줘』는 오랫동안 마음속에만 있던 이름을,
+          종이 위로 꺼내놓는 작업이었습니다.
+          특별한 사람의 이야기가 아니라, 누구나 가지고 있는
+          "내가 나로 불리고 싶은 순간"에 대한 책이 되기를 바랍니다.
+        </p>
+        <blockquote class="author-quote">
+          "이 책은 해답이 아니라 질문입니다.<br>
+          당신을 당신이라고 부르는 일은, 어떤 무게였나요?"
+        </blockquote>
+        <p style="font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase;">
+          — 저자 소개 문구는 추후 업데이트됩니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== ORDER =========================== -->
+  <section class="order" id="order">
+    <aside class="order-side">
+      <div class="section-eyebrow">Order</div>
+      <h2 class="section-title">지금, 한 권 들이세요</h2>
+      <p class="section-lede" style="margin-bottom: 0;">
+        아래 양식을 작성하시면 입금 안내를 이메일로 보내드립니다.
+        해외 배송 및 단체 주문도 문의해주세요.
+      </p>
+
+      <div class="price-block">
+        <div class="price">20,000<span style="font-size:1.2rem; color:var(--muted);"> 원</span></div>
+        <div class="price-note">택배 · 무료 배송 (국내)</div>
+      </div>
+
+      <div class="channels">
+        <a class="channel" href="mailto:edit.requin@gmail.com?subject=나단이라고 불러줘 주문 문의">
+          <span>출판사 직접 주문</span><span class="arrow">→</span>
+        </a>
+        <a class="channel" href="#form">
+          <span>아래 구글폼 작성</span><span class="arrow">↓</span>
+        </a>
+      </div>
+    </aside>
+
+    <div id="form">
       <div class="form-wrapper">
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLSc_JGECLFzNN5Gsnu7tL5i9lzPMkx0pIWzyIrCKGFMTKKfN4g/viewform?embedded=true"
@@ -68,21 +258,32 @@
           양식을 불러오는 중...
         </iframe>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="contact">
-      <h2>문의하기</h2>
-      <p>궁금하신 점이 있으시면 이메일로 연락해 주세요.</p>
-      <a href="mailto:edit.requin@gmail.com?subject=책%20주문%20문의" class="contact-link">
-        edit.requin@gmail.com
-      </a>
-    </section>
-  </main>
+  <!-- =========================== CONTACT =========================== -->
+  <section class="contact">
+    <div class="section-eyebrow">Contact</div>
+    <h2 class="section-title">궁금한 게 있으신가요?</h2>
+    <p style="color: color-mix(in oklab, var(--cream) 75%, transparent); max-width: 36ch; margin: 0 auto;">
+      편지에는 늘 답장을 드립니다.
+    </p>
+    <a href="mailto:edit.requin@gmail.com?subject=문의" class="contact-link">
+      edit.requin@gmail.com
+    </a>
+  </section>
 
   <footer>
-    <p>© 2026 상어 출판사. All rights reserved.</p>
+    © 2026 ÉDITIONS REQUIN · 상어 출판사
   </footer>
 
+  <!-- =========================== TWEAKS PANEL =========================== -->
+  <div class="tweaks-panel" id="tweaks">
+    <div class="tweaks-title">Palette</div>
+    <div class="tweaks-row" id="palette-row"></div>
+  </div>
+
   <script src="main.js"></script>
+  <script src="interactive.js"></script>
 </body>
 </html>
