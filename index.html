@@ -9,8 +9,7 @@
                  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
                  font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:;
                  img-src 'self' data:;
-                 frame-src https://tally.so;
-                 connect-src https://tally.so;">
+                 connect-src https://script.google.com https://script.googleusercontent.com;">
   <title>나단이라고 불러줘 — 상어 출판사</title>
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="apple-touch-icon" href="assets/logo.png">
@@ -68,7 +67,7 @@
   <!-- =========================== STATS =========================== -->
   <section class="stats-bar" aria-live="polite">
     <div class="stats-inner">
-      <div class="stats-label">한 권당 <strong>7000원</strong>을<br> 독자가 선택한 단체로</div>
+      <div class="stats-label">당신의 구매는 바로 기부로 이어집니다</div>
       <div class="stat">
         <span class="stat-number"><span id="order-count">—</span><span class="stat-suffix">권</span></span>
         <span class="stat-label">누적 주문</span>
@@ -91,11 +90,11 @@
         <div class="donation-partners">
           <div class="partner-label">참여 단체</div>
           <ul class="partners">
-            <li><span class="partner-logo placeholder"></span><span class="partner-name">청소년 성소수자<br>위기지원센터</span></li>
-            <li><span class="partner-logo placeholder"></span><span class="partner-name">한국성적소수자<br>문화인권센터</span></li>
-            <li><span class="partner-logo placeholder"></span><span class="partner-name">트랜스젠더<br>인권단체</span></li>
+            <li><span class="partner-logo placeholder"></span><span class="partner-name">청소년 성소수자 위기지원센터</span></li>
+            <li><span class="partner-logo placeholder"></span><span class="partner-name">한국성적소수자 문화인권센터</span></li>
+            <li><span class="partner-logo placeholder"></span><span class="partner-name">트랜스젠더 인권단체</span></li>
           </ul>
-          <p class="partner-note">* 주문 시 원하시는 단체를 지정해 주세요.</p>
+          <p class="partner-note">* 주문 시 원하시는 기부처를 선택해 주세요.</p>
         </div>
       </div>
     </div>
@@ -223,30 +222,21 @@
       <div class="author-cards">
 
         <div class="author-card">
-          <div class="author-card-portrait"><span>글 작가</span></div>
-          <div class="author-card-body">
             <div class="author-card-role">글</div>
             <h3 class="author-card-name">카트린 카스트로</h3>
             <p>『나단이라고 불러줘』의 글 작가. 잡지 마리 클레르에서 20년째 활동하고 있는 기자이기도 하다. 『나단이라고 불러줘』를 쓰기 위해 많은 트랜스젠더들과 인터뷰를 했다.</p>
-          </div>
         </div>
 
         <div class="author-card">
-          <div class="author-card-portrait"><span>그림 작가</span></div>
-          <div class="author-card-body">
             <div class="author-card-role">그림</div>
             <h3 class="author-card-name">캉탕 쥬시옹</h3>
             <p>『나단이라고 불러줘』의 그림 작가. 오랫동안 온라인에서 작품 활동을 해온 그래픽 노블 작가이기도 하다. 체중, 나이, 성차별 등 다양한 정치적인 몸을 다룬 『색채시각』(Les Éditions Lapin, 2018), 성폭력 생존자 여성들의 이야기를 다룬 『투셰』(Payot, 2019)를 쓰고 그렸다.</p>
-          </div>
         </div>
 
         <div class="author-card">
-          <div class="author-card-portrait"><span>번역</span></div>
-          <div class="author-card-body">
             <div class="author-card-role">번역</div>
             <h3 class="author-card-name">이나래</h3>
             <p>『나단이라고 불러줘』의 번역가. 퀴어, 페미니즘에 관련된 프랑스어 서적 전문 출판사 상어를 운영하고 있다. 번역서로는 세 명의 청소년이 어떤 도망자에게 도움을 받으며 자신의 삶을 변화시켜가는 청소년 소설 《평섹사》(2018, 내인생의책), 다양한 삶을 사는 여성들의 모습을 보여주는 어린이 서적 《공주는 없다》(2018, 내인생의책)가 있다.</p>
-          </div>
         </div>
 
       </div>
@@ -273,41 +263,100 @@
           <span>출판사 직접 주문</span><span class="arrow">→</span>
         </a>
         <a class="channel" href="#form">
-          <span>아래 구글폼 작성</span><span class="arrow">↓</span>
+          <span>서점에서 주문하기</span><span class="arrow">↓</span>
+          <p href="http://www.ghostbooks.kr/818025129/?idx=361#prod_detail_review">고스트북스</p>
         </a>
-      </div>
-
-      <div class="donate-aside">
-        <div class="donate-aside-row">
-          <span class="donate-aside-num">10%</span>
-          <div>
-            <div class="donate-aside-title">주문 시 기부처를 선택해주세요</div>
-            <p class="donate-aside-body">주문 폼 안에 기부처 선택 항목이 있습니다.</p>
-          </div>
-        </div>
       </div>
     </aside>
 
     <div id="form">
-      <div class="form-wrapper">
-        <iframe
-          data-tally-src="https://tally.so/embed/QKBk8X?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-          loading="lazy"
-          width="100%"
-          height="284"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-          title="책 주문 양식">
-        </iframe>
-        <script>
-          var d=document,w="https://tally.so/widgets/embed.js",
-          v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc})};
-          if("undefined"!=typeof Tally)v();
-          else if(d.getElementById("tally-js"))d.getElementById("tally-js").addEventListener("load",v);
-          else{var s=d.createElement("script");s.src=w;s.onload=v;s.id="tally-js";d.body.appendChild(s);}
-        </script>
-      </div>
+      <form id="order-form" class="order-form" novalidate>
+
+        <!-- 허니팟: 사람 눈에 보이지 않음, 봇이 채우면 차단 -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="hp-website">Website</label>
+          <input type="text" id="hp-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <!-- 주문 정보 -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">주문 정보</legend>
+          <div class="form-row">
+            <label class="form-label" for="f-quantity">수량</label>
+            <input class="form-input form-input--short" type="number" id="f-quantity" name="quantity" min="1" max="99" value="1" required>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="f-donation">기부처 선택</label>
+            <select class="form-input" id="f-donation" name="donationOrg" required>
+              <option value="">선택해주세요</option>
+              <option value="청소년 성소수자 위기지원센터 띵동">청소년 성소수자 위기지원센터 띵동</option>
+              <option value="한국성적소수자 문화인권센터">한국성적소수자 문화인권센터</option>
+              <option value="트랜스젠더 인권단체">트랜스젠더 인권단체</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <!-- 배송지 정보 -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">배송지 정보</legend>
+          <div class="form-row">
+            <label class="form-label" for="f-name">이름</label>
+            <input class="form-input" type="text" id="f-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="f-postal">
+              우편번호
+              <a class="postal-finder-link" href="https://www.juso.go.kr/openIndexPage.do" target="_blank" rel="noopener noreferrer">우편번호 찾기 →</a>
+            </label>
+            <input class="form-input form-input--short" type="text" id="f-postal" name="postalCode" pattern="[0-9]{5}" maxlength="5" placeholder="12345" inputmode="numeric" autocomplete="postal-code" required>
+            <span class="form-hint">숫자 5자리로 입력해주세요.</span>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="f-address">주소</label>
+            <input class="form-input" type="text" id="f-address" name="address" autocomplete="street-address" required>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="f-contact">연락처</label>
+            <input class="form-input" type="text" id="f-contact" name="contact" autocomplete="tel" required>
+            <span class="form-hint">배송 수령 시에만 사용됩니다.</span>
+          </div>
+        </fieldset>
+
+        <!-- 이메일 -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">연락 이메일</legend>
+          <div class="form-row">
+            <label class="form-label" for="f-email">이메일</label>
+            <input class="form-input" type="email" id="f-email" name="email" autocomplete="email" required>
+          </div>
+        </fieldset>
+
+        <!-- 요청사항 -->
+        <fieldset class="form-section">
+          <legend class="form-section-title">요청사항</legend>
+          <div class="form-row">
+            <label class="form-label" for="f-note">비고 <span style="font-size:0.65rem; color:var(--muted); letter-spacing:0.04em; text-transform:none;">(선택)</span></label>
+            <textarea class="form-input form-textarea" id="f-note" name="note" rows="3" placeholder="배송 관련 요청사항이나 남기고 싶은 말이 있으시면 적어주세요."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- 총 결제 금액 -->
+        <div class="order-total-box">
+          <span class="order-total-label">총 결제 금액</span>
+          <span class="order-total-amount" id="f-total">20,000원</span>
+        </div>
+
+        <!-- 안내 문구 -->
+        <p class="order-notice">
+          주문 버튼을 누르시면 이메일로 결제할 계좌번호를 보내드립니다. 48시간 이내에 입금하시지 않으시면 주문이 자동 취소됩니다.
+          해당 이메일로는 주문 확인, 배송 안내, 기부금 전달 내역을 순차적으로 보내드립니다.
+          모든 개인정보는 배송과 안내에만 사용되며, 주문일로부터 3개월 후 삭제됩니다.
+        </p>
+
+        <div id="form-msg" class="form-msg" role="alert" aria-live="polite"></div>
+
+        <button type="submit" class="btn btn-primary" id="f-submit">주문하기 →</button>
+      </form>
     </div>
   </section>
 
@@ -335,5 +384,100 @@
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script src="main.js"></script>
   <script src="interactive.js"></script>
+  <script>
+  (function () {
+    var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyejTS5US8Mr8kmdBFcFRh-LbW4Dm0LFMx3jMSxiP_EoUwNbo0aLqPIRF1GQD4WWIUR/exec';
+    var PRICE = 20000;
+    var loadTime = Date.now();
+
+    var form     = document.getElementById('order-form');
+    var qtyInput = document.getElementById('f-quantity');
+    var totalEl  = document.getElementById('f-total');
+    var msgEl    = document.getElementById('form-msg');
+    var submitBtn= document.getElementById('f-submit');
+
+    function formatWon(n) {
+      return n.toLocaleString('ko-KR') + '원';
+    }
+
+    function updateTotal() {
+      var qty = Math.max(1, parseInt(qtyInput.value) || 1);
+      totalEl.textContent = formatWon(qty * PRICE);
+    }
+
+    qtyInput.addEventListener('input', updateTotal);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // 허니팟 체크
+      if (document.getElementById('hp-website').value) return;
+
+      // 제출 시간 체크 (3초 미만 = 봇)
+      if (Date.now() - loadTime < 3000) return;
+
+      var qty = Math.max(1, parseInt(qtyInput.value) || 1);
+      var data = {
+        name:        document.getElementById('f-name').value.trim(),
+        postalCode:  document.getElementById('f-postal').value.trim(),
+        address:     document.getElementById('f-address').value.trim(),
+        contact:     document.getElementById('f-contact').value.trim(),
+        email:       document.getElementById('f-email').value.trim(),
+        quantity:    qty,
+        donationOrg: document.getElementById('f-donation').value,
+        note:        document.getElementById('f-note').value.trim(),
+        total:       formatWon(qty * PRICE),
+        loadTime:    loadTime,
+        website:     ''
+      };
+
+      var errors = [];
+      if (!data.name)                                         errors.push('이름');
+      if (!/^[0-9]{5}$/.test(data.postalCode))               errors.push('우편번호(숫자 5자리)');
+      if (!data.address)                                      errors.push('주소');
+      if (!data.contact)                                      errors.push('연락처');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))   errors.push('올바른 이메일');
+      if (!data.donationOrg)                                  errors.push('기부처');
+
+      if (errors.length) {
+        showMsg('error', '다음 항목을 확인해주세요: ' + errors.join(', '));
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '주문 접수 중…';
+      msgEl.className = 'form-msg';
+      msgEl.textContent = '';
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res.success) {
+          showMsg('success', '주문이 접수되었습니다. 잠시 후 이메일로 계좌번호를 보내드립니다.');
+          form.reset();
+          updateTotal();
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(function () {
+        showMsg('error', '일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '주문하기 →';
+      });
+    });
+
+    function showMsg(type, text) {
+      msgEl.className = 'form-msg form-msg--' + type;
+      msgEl.textContent = text;
+    }
+  })();
+  </script>
 </body>
 </html>
