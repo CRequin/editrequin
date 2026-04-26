@@ -82,7 +82,7 @@
   <!-- =========================== DONATION RIBBON =========================== -->
   <section class="donation">
     <div class="donation-inner">
-      <div class="donation-num">10<span class="pct">%</span></div>
+      <div class="donation-num">7000<span class="pct">원</span></div>
       <div class="donation-body">
         <div class="section-eyebrow">Give-back Edition</div>
         <h2 class="donation-title">한 권당<br> 7000원의 기부금</h2>
@@ -451,7 +451,7 @@
 
       fetch(SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(data)
       })
       .then(function (r) { return r.json(); })
