@@ -284,11 +284,22 @@ function buildCustomerEmail(name, orderId, copies) {
 // 이메일 템플릿: 고객 입금 안내
 // ============================================================
 function buildCustomerOrderEmail(name, quantity, total) {
-  return `안녕하세요, 나단이라고 불러줘 구매해주셔서 감사합니다.
+  return `안녕하세요, ${name}님.
 
-총 ${quantity}권, 총 ${total.toLocaleString('ko-KR')}원
+나단이라고 불러줘를 구매해주셔서 정말 감사합니다. 🎉
 
-계좌번호는 ${CONFIG.BANK_ACCOUNT} 아래로 입금해주세요.
+주문 정보
+━━━━━━━━━━━━━━━━━━━━━
+수량: ${quantity}권
+금액: ${total.toLocaleString('ko-KR')}
 
-입금 확인이 되면 24시간 이내에 배송을 시작합니다.`;
+입금 안내
+━━━━━━━━━━━━━━━━━━━━━
+계좌번호: ${CONFIG.BANK_ACCOUNT}
+
+입금 후 24시간 이내에 배송을 시작하겠습니다.
+입금 확인을 위해 이 메일로 문의해주세요.
+
+감사합니다!
+상어 출판사 드림`;
 }
