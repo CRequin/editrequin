@@ -86,7 +86,7 @@
       <div class="donation-num">7000<span class="pct">원</span></div>
       <div class="donation-body">
         <div class="section-eyebrow">Give-back Edition</div>
-        <h2 class="donation-title">한 권당<br> 7000원의 기부금</h2>
+        <h2 class="donation-title">당신의 구매가 기부로 이어집니다</h2>
         <p>『나단이라고 불러줘』 한 권이 판매될 때마다 구매자가 선택한 단체로 7000원이 기부됩니다.</p>
         <div class="donation-partners">
           <div class="partner-label">참여 단체</div>
@@ -174,7 +174,7 @@
   <section class="section" id="reviews">
     <div class="section-eyebrow">Reviews</div>
     <h2 class="section-title">추천의 말</h2>
-    <p class="section-lede">네 분의 독자가 나단과 보낸 시간을 나누어주셨습니다. 카드를 누르면 전문을 읽을 수 있습니다.</p>
+    <p class="section-lede">네 분의 독자가 나단과 보낸 시간을 나누어주셨습니다. 클릭해서 전문을 읽어보세요.</p>
 
     <div class="themes reviews-grid">
       <a class="theme review-card" href="reviews.html#review-1">
@@ -266,7 +266,7 @@
         </a>
         <a class="channel" href="#form">
           <span>서점에서 주문하기</span><span class="arrow">↓</span>
-          <p href="http://www.ghostbooks.kr/818025129/?idx=361#prod_detail_review">고스트북스</p>
+          <a href="http://www.ghostbooks.kr/818025129/?idx=361#prod_detail_review" target="_blank" rel="noopener">고스트북스</a>
         </a>
       </div>
     </aside>
@@ -471,7 +471,7 @@
       hf.submit();
       setTimeout(function () { document.body.removeChild(hf); }, 1000);
 
-      showMsg('success', '주문이 접수되었습니다. 잠시 후 이메일로 계좌번호를 보내드립니다.');
+      showMsg('success', '주문이 접수되었습니다. 이메일을 확인해주세요.');
       form.reset();
       updateTotal();
       submitBtn.disabled = false;
