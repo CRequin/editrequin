@@ -2,71 +2,48 @@
 // CONFIGURATION — 배포 전 이 값들을 수정하세요
 // ============================================================
 const CONFIG = {
-  BOOK_PRICE: 25000,                        // 권당 가격 (원)
-  BOOK_TITLE: "책 제목",                    // 이메일 본문에 사용
-  OWNER_EMAIL: "your@gmail.com",            // 주문 알림 받을 이메일
-  REPLY_TO_EMAIL: "your@gmail.com",         // 고객이 답장할 이메일
+  BOOK_PRICE: 20000,                        // 권당 가격 (원)
+  BOOK_TITLE: "나단이라고 불러줘",          // 이메일 본문에 사용
+  OWNER_EMAIL: "edit.requin@gmail.com",     // 주문 알림 받을 이메일
+  REPLY_TO_EMAIL: "edit.requin@gmail.com",  // 고객이 답장할 이메일
   SHEET_NAME: "Form Responses 1",           // Google Sheets 탭 이름
+  BANK_ACCOUNT: "카카오뱅크 3333-05-9867460 이나래",  // 입금 계좌번호
 
   // 컬럼 번호 (1부터 시작)
-  // A~G: Form 자동 생성, H~M: 수동 추가
-  COL_TIMESTAMP: 1,             // A: 타임스탬프
-  COL_EMAIL: 2,                 // B: 이메일 주소
-  COL_COPIES: 3,                // C: 구매 권 수
-  COL_NAME: 4,                  // D: 배송인 이름
-  COL_ADDRESS: 5,               // E: 배송 주소
-  COL_REQUESTS: 6,              // F: 요청 사항 (기록만, 처리 불필요)
-  COL_CONSENT: 7,               // G: 동의 여부 (기록만, 처리 불필요)
-  COL_ORDER_ID: 8,              // H: Order ID (Apps Script 자동)
-  COL_PAYMENT_CONFIRMED: 9,     // I: 입금확인 (소유자 체크박스)
-  COL_CONFIRMATION_SENT: 10,    // J: 확인메일발송 (Apps Script 자동)
-  COL_CONFIRMATION_SENT_AT: 11, // K: 메일발송시각 (Apps Script 자동)
-  COL_DELIVERY_DONE: 12,        // L: 배송 완료 (소유자 수동 체크박스)
-  COL_OWNER_NOTES: 13,          // M: 메모 (수동, 선택사항)
+  COL_TIMESTAMP: 1,             // A: 접수일시
+  COL_NAME: 2,                  // B: 이름
+  COL_POSTAL: 3,                // C: 우편번호
+  COL_ADDRESS: 4,               // D: 주소
+  COL_CONTACT: 5,               // E: 연락처
+  COL_EMAIL: 6,                 // F: 이메일
+  COL_QUANTITY: 7,              // G: 수량
+  COL_DONATION: 8,              // H: 기부처
+  COL_NOTE: 9,                  // I: 비고
+  COL_TOTAL: 10,                // J: 결제금액
+  COL_ORDER_ID: 11,             // K: Order ID (Apps Script 자동)
+  COL_PAYMENT_CONFIRMED: 12,    // L: 입금확인 (소유자 체크박스)
+  COL_CONFIRMATION_SENT: 13,    // M: 확인메일발송 (Apps Script 자동)
+  COL_CONFIRMATION_SENT_AT: 14, // N: 메일발송시각 (Apps Script 자동)
+  COL_DELIVERY_DONE: 15,        // O: 배송 완료 (소유자 수동 체크박스)
+  COL_OWNER_NOTES: 16,          // P: 메모 (수동, 선택사항)
 
   MAX_ORDERS_PER_EMAIL_PER_DAY: 3,          // 동일 이메일 일일 주문 한도 (스팸 방지)
 };
 
 // ============================================================
-// 트리거 1: 주문 양식 제출 시 자동 실행
+// 참고: HTML 폼에서 doPost로 제출되므로 onFormSubmit은 불필요합니다
+// Google Form을 사용하려면 이 함수를 다시 활성화하세요
 // ============================================================
-function onFormSubmit(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet()
-    .getSheetByName(CONFIG.SHEET_NAME);
-  const lastRow = sheet.getLastRow();
-
-  const customerEmail = getValue(e, "이메일 주소");
-  const copies        = getValue(e, "구매 권 수");
-  const customerName  = getValue(e, "배송인 이름");
-  const address       = getValue(e, "배송 주소");
-  const requests      = getValue(e, "요청 사항");
-
-  // Order ID 생성 후 Sheets에 기록
-  const orderId = generateOrderId(lastRow);
-  sheet.getRange(lastRow, CONFIG.COL_ORDER_ID).setValue(orderId);
-
-  // 스팸/어뷰징 감지
-  if (isRateLimited(sheet, customerEmail)) {
-    sheet.getRange(lastRow, CONFIG.COL_OWNER_NOTES)
-         .setValue("FLAGGED: 동일 이메일 일일 한도 초과");
-    return;
-  }
-
-  // 소유자에게 알림 메일 발송
-  MailApp.sendEmail({
-    to: CONFIG.OWNER_EMAIL,
-    subject: `[새 주문] ${orderId} — ${customerName}`,
-    body: buildOwnerEmail(orderId, customerName, customerEmail, copies, address, requests),
-  });
-}
 
 // ============================================================
-// 트리거 2: 소유자가 '입금확인' 체크박스 체크 시 자동 실행
+// 트리거: 소유자가 '입금확인' 체크박스 체크 시 자동 실행
 // ============================================================
 function onEdit(e) {
+  if (!e || !e.source) return;
+  
   const sheet = e.source.getActiveSheet();
-  if (sheet.getName() !== CONFIG.SHEET_NAME) return;
-  if (e.range.getColumn() !== CONFIG.COL_PAYMENT_CONFIRMED) return;
+  if (!sheet || sheet.getName() !== CONFIG.SHEET_NAME) return;
+  if (!e.range || e.range.getColumn() !== CONFIG.COL_PAYMENT_CONFIRMED) return;
   if (e.value !== "TRUE") return;
 
   const row = e.range.getRow();
@@ -74,9 +51,9 @@ function onEdit(e) {
   // 이미 발송한 경우 중복 방지
   if (sheet.getRange(row, CONFIG.COL_CONFIRMATION_SENT).getValue() === true) return;
 
-  const rowData       = sheet.getRange(row, 1, 1, 13).getValues()[0];
+  const rowData       = sheet.getRange(row, 1, 1, 16).getValues()[0];
   const customerEmail = rowData[CONFIG.COL_EMAIL - 1];
-  const copies        = rowData[CONFIG.COL_COPIES - 1];
+  const quantity      = rowData[CONFIG.COL_QUANTITY - 1];
   const customerName  = rowData[CONFIG.COL_NAME - 1];
   const orderId       = rowData[CONFIG.COL_ORDER_ID - 1];
 
@@ -86,7 +63,7 @@ function onEdit(e) {
     to: customerEmail,
     replyTo: CONFIG.REPLY_TO_EMAIL,
     subject: `주문 확인되었습니다! [${orderId}]`,
-    body: buildCustomerEmail(customerName, orderId, copies),
+    body: buildCustomerEmail(customerName, orderId, quantity),
   });
 
   // 발송 완료 표시
@@ -98,34 +75,114 @@ function onEdit(e) {
 // Web App 엔드포인트: 집계 통계만 반환 (개인정보 없음)
 // 배포 설정: Execute as = Me, Who has access = Anyone
 // ============================================================
-function doGet() {
-  const cache = CacheService.getScriptCache();
-  const cached = cache.get("stats");
-  if (cached) {
-    return buildJsonResponse(JSON.parse(cached));
+function doPost(e) {
+  try {
+    var data = e.parameter;
+
+    // 허니팟 체크
+    if (data.website) return respond(false, 'blocked');
+
+    // 시간 체크 (3초 미만 = 봇)
+    if (!data.loadTime || (Date.now() - Number(data.loadTime)) < 3000)
+      return respond(false, 'blocked');
+
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName(CONFIG.SHEET_NAME) || ss.getActiveSheet();
+
+    // 헤더가 없으면 첫 행에 추가
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['접수일시','이름','우편번호','주소','연락처','이메일','수량','기부처','비고','결제금액']);
+    }
+
+    const lastRow = sheet.getLastRow() + 1;
+    const orderId = generateOrderId(lastRow);
+    
+    sheet.appendRow([
+      new Date(),
+      data.name,
+      data.postalCode,
+      data.address,
+      data.contact,
+      data.email,
+      data.quantity,
+      data.donationOrg,
+      data.note,
+      data.total
+    ]);
+
+    // Order ID 추가
+    sheet.getRange(lastRow, CONFIG.COL_ORDER_ID).setValue(orderId);
+
+    // 고객에게 입금 안내 메일 발송
+    MailApp.sendEmail({
+      to: data.email,
+      replyTo: CONFIG.REPLY_TO_EMAIL,
+      subject: "나단이라고 불러줘 주문 확인 메일",
+      body: buildCustomerOrderEmail(data.name, data.quantity, data.total),
+    });
+
+    // 소유자에게 알림 메일 발송
+    MailApp.sendEmail({
+      to: CONFIG.OWNER_EMAIL,
+      subject: `[새 주문] ${orderId} — ${data.name}`,
+      body: buildOwnerEmail(orderId, data.name, data.email, data.quantity, data.address, data.note),
+    });
+
+    return respond(true, 'ok');
+  } catch (err) {
+    return respond(false, err.toString());
   }
+}
 
-  const sheet     = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CONFIG.SHEET_NAME);
-  const lastRow   = sheet.getLastRow();
-  const totalOrders = Math.max(0, lastRow - 1); // 헤더 행 제외
+function respond(success, message) {
+  return ContentService
+    .createTextOutput(JSON.stringify({ success: success, message: message }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
 
-  let confirmedOrders = 0;
-  if (totalOrders > 0) {
-    const confirmed = sheet
-      .getRange(2, CONFIG.COL_PAYMENT_CONFIRMED, totalOrders, 1)
-      .getValues();
-    confirmedOrders = confirmed.filter(r => r[0] === true).length;
+// ============================================================
+// Web App 엔드포인트: 통계 반환
+// ============================================================
+function doGet(e) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName(CONFIG.SHEET_NAME) || ss.getActiveSheet();
+    var lastRow = sheet.getLastRow();
+
+    // 헤더만 있거나 비어있으면 0
+    var dataRows = lastRow <= 1 ? 0 : lastRow - 1;
+
+    // 결제금액 열(J열, 10번째) 합산
+    var totalAmount = 0;
+    if (dataRows > 0) {
+      var amounts = sheet.getRange(2, CONFIG.COL_TOTAL, dataRows, 1).getValues();
+      amounts.forEach(function(row) {
+        var val = Number(row[0]);
+        if (!isNaN(val)) totalAmount += val;
+      });
+    }
+
+    // 수량 열(G열, 7번째) 합산 — 권 수 기준
+    var totalOrders = 0;
+    if (dataRows > 0) {
+      var quantities = sheet.getRange(2, CONFIG.COL_QUANTITY, dataRows, 1).getValues();
+      quantities.forEach(function(row) {
+        var val = Number(row[0]);
+        if (!isNaN(val)) totalOrders += val;
+      });
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        totalOrders: totalOrders,
+        fundraisingAmount: totalAmount
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ totalOrders: 0, fundraisingAmount: 0 }))
+      .setMimeType(ContentService.MimeType.JSON);
   }
-
-  const stats = {
-    totalOrders:       totalOrders,
-    confirmedOrders:   confirmedOrders,
-    fundraisingAmount: confirmedOrders * CONFIG.BOOK_PRICE,
-    updatedAt:         new Date().toISOString(),
-  };
-
-  cache.put("stats", JSON.stringify(stats), 300); // 5분 캐시
-  return buildJsonResponse(stats);
 }
 
 // ============================================================
@@ -137,25 +194,19 @@ function installTriggers() {
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
 
-  ScriptApp.newTrigger("onFormSubmit")
-    .forSpreadsheet(ss)
-    .onFormSubmit()
-    .create();
-
+  // onEdit 트리거만 설치 (HTML 폼은 doPost로 처리)
   ScriptApp.newTrigger("onEdit")
     .forSpreadsheet(ss)
     .onEdit()
     .create();
 
-  Logger.log("트리거 설치 완료");
+  Logger.log("트리거 설치 완료 (onEdit만 활성화)");
 }
 
 // ============================================================
 // 내부 헬퍼 함수
 // ============================================================
-function getValue(e, fieldName) {
-  return (e.namedValues[fieldName] && e.namedValues[fieldName][0]) || "";
-}
+// getValue 함수는 onFormSubmit이 제거되었으므로 이제 불필요합니다
 
 function generateOrderId(lastRow) {
   const year = new Date().getFullYear();
@@ -192,20 +243,20 @@ function buildJsonResponse(data) {
 // ============================================================
 // 이메일 템플릿: 소유자 알림
 // ============================================================
-function buildOwnerEmail(orderId, name, email, copies, address, requests) {
+function buildOwnerEmail(orderId, name, email, quantity, address, note) {
   return `새 주문이 접수되었습니다.
 
 주문번호:   ${orderId}
 배송인:     ${name}
 이메일:     ${email}
-수량:       ${copies}
+수량:       ${quantity}
 배송주소:   ${address}
-요청사항:   ${requests || "없음"}
+요청사항:   ${note || "없음"}
 
 [처리 방법]
 1. 고객에게 입금 안내 (계좌번호 등)
 2. 입금 확인 후 Google Sheets 열기
-3. ${orderId} 행의 '입금확인' 체크박스(I열) 체크
+3. ${orderId} 행의 '입금확인' 체크박스(L열) 체크
    → 고객에게 확인 메일이 자동 발송됩니다`;
 }
 
@@ -227,4 +278,17 @@ function buildCustomerEmail(name, orderId, copies) {
 
 감사합니다!
 [저자명] 드림`;
+}
+
+// ============================================================
+// 이메일 템플릿: 고객 입금 안내
+// ============================================================
+function buildCustomerOrderEmail(name, quantity, total) {
+  return `안녕하세요, 나단이라고 불러줘 구매해주셔서 감사합니다.
+
+총 ${quantity}권, 총 ${total.toLocaleString('ko-KR')}원
+
+계좌번호는 ${CONFIG.BANK_ACCOUNT} 아래로 입금해주세요.
+
+입금 확인이 되면 24시간 이내에 배송을 시작합니다.`;
 }
