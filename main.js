@@ -1,6 +1,6 @@
 // Replace with your deployed Apps Script Web App URL after setup
 const STATS_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbzqqruGbgKcrqvzgOK29yvHac251_8i2MvCmhV4yMWPWzQcThLP0B40pEIQcR4MSU-vOw/exec";
+  "https://script.google.com/macros/s/AKfycbwtrtG1gH9_d4oxlnBfkSjNPFVPZ1Yf05ZG3f1xIYgLhI4HbDTxGDnEcNdpmFNQSxesHQ/exec";
 
 async function loadStats() {
   const countEl = document.getElementById("order-count");
