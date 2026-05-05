@@ -84,17 +84,21 @@
   <!-- =========================== DONATION RIBBON =========================== -->
   <section class="donation">
     <div class="donation-inner">
-      <div class="donation-num">7000</div>
+        <div class="donation-num">7000<span class="donation-unit">원</span></div>
       <div class="donation-body">
         <div class="section-eyebrow">Give-back Edition</div>
         <h2 class="donation-title">당신의 구매가 기부로 이어집니다</h2>
         <p>『나단이라고 불러줘』 한 권이 판매될 때마다 구매자가 선택한 단체로 7000원이 기부됩니다.</p>
         <div class="donation-partners">
-          <div class="partner-label">참여 단체</div>
+          <div class="partner-label">기부처</div>
           <ul class="partners">
-            <li><img src="assets/ddingdong_logo.png" alt="띵동 로고" class="partner-logo"><span class="partner-name">사단법인 청소년 성소수자 지원센터 띵동</span></li>
-            <li><span class="partner-logo placeholder"></span><span class="partner-name">새로운 기부처를 추천해주세요</span></li>
-            <li><span class="partner-logo placeholder"></span><span class="partner-name">새로운 기부처를 추천해주세요</span></li>
+            <li>
+              <a href="https://www.ddingdong.kr/" target="_blank" rel="noopener noreferrer">
+                <img src="assets/ddingdong_logo.png" alt="띵동 로고" class="partner-logo">
+                <span class="partner-name">사단법인 청소년 성소수자 지원센터 띵동</span>
+              </a>
+            </li>
+            <li><span class="partner-logo placeholder"></span><span class="partner-name">메일로 새로운 기부처를 추천해주세요</span></li>
           </ul>
           <p class="partner-note">* 주문 시 원하시는 기부처를 선택해 주세요.</p>
           <p class="partner-note">* 누적 기부금과 전달 내역은 매월 말 투명하게 공개합니다.</p> 
@@ -239,7 +243,7 @@
         <div class="author-card">
             <div class="author-card-role">번역</div>
             <h3 class="author-card-name">이나래</h3>
-            <p>『나단이라고 불러줘』의 번역가. 퀴어, 페미니즘에 관련된 프랑스어 서적 전문 출판사 상어를 운영하고 있다. 번역서로는 세 명의 청소년이 어떤 도망자에게 도움을 받으며 자신의 삶을 변화시켜가는 청소년 소설 《평섹사》(2018, 내인생의책), 다양한 삶을 사는 여성들의 모습을 보여주는 어린이 서적 《공주는 없다》(2018, 내인생의책)가 있다.</p>
+            <p>『나단이라고 불러줘』의 번역가. 퀴어, 페미니즘에 관련된 프랑스어 서적 전문 출판사 상어를 운영하고 있다.『나단이라고 불러줘』초판을 모두 판매하고 나면 곧 출판사 문을 닫을 예정이다.</p>
         </div>
 
       </div>
@@ -252,23 +256,27 @@
       <div class="section-eyebrow">Order</div>
       <h2 class="section-title">지금 주문하세요</h2>
       <p class="section-lede" style="margin-bottom: 0;">
-        아래 양식을 작성하시면 입금 안내를 이메일로 보내드립니다.
-        
+        주문 양식을 작성해주세요.
       </p>
 
       <div class="price-block">
         <div class="price">20,000<span style="font-size:1.2rem; color:var(--muted);"> 원</span></div>
-        <div class="price-note">택배 · 무료 배송 (국내)</div>
+        <div class="price-note">배송비 2500원 · 5만원 이상 구매 시 무료 배송 (국내)</div>
+        <p class="price-subnote">해외 배송을 원하시면 이메일로 문의해주세요.</p>
       </div>
 
       <div class="channels">
         <a class="channel" href="/cdn-cgi/l/email-protection#4623222f3268342337332f2806212b272f2a6825292b793533242c2325327badc4deadcdeeaadbf2addbfaacf5e666adf0ceadd9eaaae2de66aae5faadeafe66adeafeaadbde">
           <span>출판사 직접 주문</span><span class="arrow">→</span>
         </a>
-        <a class="channel" href="#form">
-          <span>서점에서 주문하기</span><span class="arrow">↓</span>
-          <a href="http://www.ghostbooks.kr/818025129/?idx=361#prod_detail_review" target="_blank" rel="noopener">고스트북스</a>
-        </a>
+        <div class="channel channel--expanded">
+          <div class="channel-heading">
+            <span>서점에서 주문하기</span>
+            <span class="arrow">↓</span>
+          </div>
+          <a class="channel-link" href="http://www.ghostbooks.kr/818025129/?idx=361#prod_detail_review" target="_blank" rel="noopener">고스트북스</a>
+          <p class="channel-note">서점에서 구매하셔도 수익의 일부가 기부됩니다. 망설이지 말고 서점으로 향하세요!</p>
+        </div>
       </div>
     </aside>
 
@@ -349,8 +357,9 @@
 
         <!-- 안내 문구 -->
         <p class="order-notice">
-          주문 버튼을 누르시면 이메일로 결제할 계좌번호를 보내드립니다. 48시간 이내에 입금하시지 않으시면 주문이 자동 취소됩니다.
-          해당 이메일로는 주문 확인, 배송 안내, 기부금 전달 내역을 순차적으로 보내드립니다.
+          주문 버튼을 누르시면 결제할 계좌번호가 화면에 표시되고 이메일로도 결제할 계좌번호를 보내드립니다.
+          48시간 이내에 입금하시지 않으시면 주문이 자동 취소됩니다.
+          주문 확인, 배송 안내, 기부금 전달 내역을 메일로 받아보실 수 있습니다.
           모든 개인정보는 배송과 안내에만 사용되며, 주문일로부터 3개월 후 삭제됩니다.
         </p>
 
@@ -367,10 +376,10 @@
     <div class="section-eyebrow">Contact</div>
     <h2 class="section-title">궁금한 게 있으신가요?</h2>
     <p style="color: color-mix(in oklab, var(--cream) 75%, transparent); max-width: 36ch; margin: 0 auto;">
-      편지에는 늘 답장을 드립니다.
+      답장해드릴게요.
     </p>
-    <a href="/cdn-cgi/l/email-protection#2346474a570d514652564a4d63444e424a4f0d404c4e1c505641494640571ec88f9bcfbebb" class="contact-link">
-      <span class="__cf_email__" data-cfemail="f491909d80da869185819d9ab49399959d98da979b99">[email&#160;protected]</span>
+    <a href="/cdn-cgi/l/email-protection#2346474a570d514652564a4d63444e424a4f0d404c4e1c505641494640571ec88f9bcfbebb" class="contact-link" aria-label="이메일로 문의하기">
+      문의하기
     </a>
   </section>
 
@@ -390,6 +399,8 @@
   (function () {
     var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWnsuzrXCxNyUAluxFv8oxVymV8O2VFGx31ffdky7AykV832lTMFEX1USyyY6JJfL9Hg/exec';
     var PRICE = 20000;
+    var SHIPPING = 2500;
+    var FREE_SHIPPING_THRESHOLD = 50000;
     var loadTime = Date.now();
 
     var form     = document.getElementById('order-form');
@@ -402,9 +413,14 @@
       return n.toLocaleString('ko-KR') + '원';
     }
 
+    function calculateTotal(qty) {
+      var subtotal = qty * PRICE;
+      return subtotal >= FREE_SHIPPING_THRESHOLD ? subtotal : subtotal + SHIPPING;
+    }
+
     function updateTotal() {
       var qty = Math.max(1, parseInt(qtyInput.value) || 1);
-      totalEl.textContent = formatWon(qty * PRICE);
+      totalEl.textContent = formatWon(calculateTotal(qty));
     }
 
     qtyInput.addEventListener('input', updateTotal);
@@ -428,7 +444,7 @@
         quantity:    qty,
         donationOrg: document.getElementById('f-donation').value,
         note:        document.getElementById('f-note').value.trim(),
-        total:       formatWon(qty * PRICE),
+        total:       formatWon(calculateTotal(qty)),
         loadTime:    loadTime,
         website:     ''
       };
@@ -470,7 +486,7 @@
       hf.submit();
       setTimeout(function () { document.body.removeChild(hf); }, 1000);
 
-      showMsg('success', '주문이 접수되었습니다. 이메일을 확인해주세요.');
+      showMsg('success', '주문이 접수되었습니다.\n\n메일로 입금 안내를 보내드렸습니다.\n계좌번호: 카카오뱅크 3333-05-9867460 이나래\n입금 확인 후 배송을 시작합니다.');
       form.reset();
       updateTotal();
       submitBtn.disabled = false;

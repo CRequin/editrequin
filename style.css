@@ -337,12 +337,18 @@ a { color: inherit; }
 
 .donation-num {
   font-family: var(--font-serif);
-  font-size: clamp(4rem, 9vw, 7rem);
+  font-size: clamp(3.2rem, 7vw, 5rem);
   font-weight: 700;
   line-height: 1;
   color: var(--terracotta);
   letter-spacing: -0.03em;
   padding-top: 0.15em;
+}
+
+.donation-num .donation-unit {
+  font-size: 0.45em;
+  vertical-align: super;
+  margin-left: 0.1em;
 }
 
 .donation-num .pct {
@@ -409,11 +415,27 @@ a { color: inherit; }
   flex-shrink: 0;
 }
 
+.partners li a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.partners li a:hover .partner-name {
+  text-decoration: underline;
+}
+
 .partner-logo {
-  width: 48px;
-  height: 48px;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
   flex-shrink: 0;
+  background: transparent;
+  border-radius: 0.75rem;
+  padding: 0.35rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .partner-name { line-height: 1.3; }
@@ -895,31 +917,69 @@ a { color: inherit; }
 
 .price-block .price-note {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
   color: var(--muted);
   text-transform: uppercase;
   margin-top: 0.4rem;
+  line-height: 1.5;
+}
+
+.price-block .price-subnote {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  line-height: 1.6;
 }
 
 .channels {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .channel {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.9rem 1.1rem;
+  padding: 0.95rem 1.1rem;
   background: var(--cream);
   border: 1px solid var(--rule);
   text-decoration: none;
   color: var(--ink);
   font-size: 0.95rem;
   transition: border-color 0.2s, transform 0.2s;
+}
+
+.channel--expanded {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+.channel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.channel-link {
+  display: inline-block;
+  color: var(--navy);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.channel-note {
+  font-family: var(--font-mono);
+  font-size: 0.83rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
 }
 
 .channel:hover { border-color: var(--navy); transform: translateX(4px); }
