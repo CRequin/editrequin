@@ -294,7 +294,7 @@
           <legend class="form-section-title">주문 정보</legend>
           <div class="form-row">
             <label class="form-label" for="f-quantity">수량</label>
-            <input class="form-input form-input--short" type="number" id="f-quantity" name="quantity" min="1" max="99" value="1" required>
+            <input class="form-input form-input--short" type="number" id="f-quantity" name="quantity" min="1" max="99" required>
           </div>
           <div class="form-row">
             <label class="form-label" for="f-donation">기부처 선택</label>
@@ -352,7 +352,7 @@
         <!-- 총 결제 금액 -->
         <div class="order-total-box">
           <span class="order-total-label">총 결제 금액</span>
-          <span class="order-total-amount" id="f-total">20,000원</span>
+          <span class="order-total-amount" id="f-total"></span>
         </div>
 
         <!-- 안내 문구 -->
@@ -419,8 +419,12 @@
     }
 
     function updateTotal() {
-      var qty = Math.max(1, parseInt(qtyInput.value) || 1);
-      totalEl.textContent = formatWon(calculateTotal(qty));
+      var qty = parseInt(qtyInput.value) || 0;
+      if (qty > 0) {
+        totalEl.textContent = formatWon(calculateTotal(qty));
+      } else {
+        totalEl.textContent = '';
+      }
     }
 
     qtyInput.addEventListener('input', updateTotal);
