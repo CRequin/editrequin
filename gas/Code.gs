@@ -152,16 +152,6 @@ function doGet(e) {
     // 헤더만 있거나 비어있으면 0
     var dataRows = lastRow <= 1 ? 0 : lastRow - 1;
 
-    // 결제금액 열(J열, 10번째) 합산
-    var totalAmount = 0;
-    if (dataRows > 0) {
-      var amounts = sheet.getRange(2, CONFIG.COL_TOTAL, dataRows, 1).getValues();
-      amounts.forEach(function(row) {
-        var val = Number(row[0]);
-        if (!isNaN(val)) totalAmount += val;
-      });
-    }
-
     // 수량 열(G열, 7번째) 합산 — 권 수 기준
     var totalOrders = 0;
     if (dataRows > 0) {
@@ -172,10 +162,13 @@ function doGet(e) {
       });
     }
 
+    // 펀드레이징 금액은 수량 합산에 7000원 단가를 곱해서 계산
+    var fundraisingAmount = totalOrders * 7000;
+
     return ContentService
       .createTextOutput(JSON.stringify({
         totalOrders: totalOrders,
-        fundraisingAmount: totalAmount
+        fundraisingAmount: fundraisingAmount
       }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
