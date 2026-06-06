@@ -355,7 +355,7 @@ a { color: inherit; }
   max-width: var(--max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: auto 1fr 1fr;
+  grid-template-columns: auto 1fr 1fr 1fr;
   gap: clamp(1.5rem, 4vw, 3rem);
   align-items: center;
 }
@@ -391,6 +391,23 @@ a { color: inherit; }
   color: color-mix(in oklab, var(--cream) 65%, transparent);
   letter-spacing: 0.04em;
 }
+
+.stat--done {
+  position: relative;
+  padding-left: clamp(1.5rem, 3vw, 2.5rem);
+}
+.stat--done::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in oklab, var(--sage) 40%, transparent);
+}
+.stat--done .stat-number { color: var(--sage); }
+.stat--done .stat-suffix { color: var(--sage); }
+.stat--done .stat-label { color: color-mix(in oklab, var(--sage) 75%, transparent); }
 
 /* =============================================================
    Donation ribbon
@@ -523,6 +540,73 @@ a { color: inherit; }
   color: var(--muted);
   margin: 0;
 }
+
+.donation-record {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--rule);
+  background: color-mix(in oklab, var(--ivory) 55%, transparent);
+}
+
+.donation-record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.donation-record-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.donation-record-date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.donation-record-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.donation-record-table td {
+  padding: 0.25rem 0.5rem 0.25rem 0;
+  color: var(--ink);
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.donation-record-table td:nth-child(2) {
+  text-align: right;
+  color: var(--navy);
+  font-weight: 600;
+  padding-right: 1rem;
+  white-space: nowrap;
+}
+
+.donation-record-table td:nth-child(3) {
+  text-align: right;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.donation-record-total td {
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--rule);
+  font-weight: 700;
+}
+
+.donation-record-total td:first-child { color: var(--teal); }
+.donation-record-total td:nth-child(2) { color: var(--terracotta); }
 
 @media (max-width: 600px) {
   .donation-inner { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -1491,8 +1575,10 @@ footer {
   .author-inner { grid-template-columns: 1fr; }
   .order { grid-template-columns: 1fr; }
   .themes { grid-template-columns: 1fr; }
-  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .stats-inner { grid-template-columns: 1fr 1fr 1fr; }
   .stats-label { grid-column: 1 / -1; max-width: none; }
+  .stat--done { padding-left: 0; }
+  .stat--done::before { display: none; }
   .nav-links { display: none; }
 }
 
