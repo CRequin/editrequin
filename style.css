@@ -392,6 +392,13 @@ a { color: inherit; }
   letter-spacing: 0.04em;
 }
 
+.stat-remaining {
+  font-size: 0.68rem;
+  color: color-mix(in oklab, var(--sage) 85%, var(--cream) 15%);
+  letter-spacing: 0.02em;
+  margin-top: 0.1rem;
+}
+
 .stat--done {
   position: relative;
   padding-left: clamp(1.5rem, 3vw, 2.5rem);
